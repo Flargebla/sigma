@@ -1,0 +1,41 @@
+<p>
+	<strong>Title:</strong>
+	<%= @sig.title %>
+</p>
+
+<p>
+	<strong>Tags:</strong>
+	<%= @sig.tags %>
+</p>
+
+<p>
+	<strong>Time Created:</strong>
+	<%= @sig.created_at %>
+</p>
+
+<p>
+	<img src="<%= @sig.file %>" >
+</p>
+
+<p>
+	<strong>Likes:</strong>
+	<%= @sig.likes %>
+</p>
+
+<%= button_to 'Back to web', sigs_path, :method => :get %>
+
+<%= button_to 'Like', :method => :post, controller: 'sigs', action: 'like' %>
+
+<%= form_for :edge, :method => :post, :url => {:controller => "edges", :action => "connect"} do |f| %>
+	<p>     
+	 	<%= f.label :aside %>
+		<%= f.collection_select :aside, Sig.all, :id, :title %>
+	</p>
+
+	<p style="display:none;">
+		<%= f.label :bside %>
+		<%= f.number_field :bside, :value => @sig.id %>
+	</p>
+	
+	<%= f.submit 'Connect this edge' %> 
+<% end %>

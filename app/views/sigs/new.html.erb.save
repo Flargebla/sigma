@@ -1,0 +1,54 @@
+<h1>Create a new Sig</h1>
+
+<%= form_for :sig, :method => :post, :url => {:action => "create"} do |f| %>
+ <p>
+    <%= f.label :title %><br>
+    <%= f.text_field :title %>
+  </p>
+
+  <p>
+    <%= f.label :tags %><br>
+    <%= f.text_field :tags %>
+  </p>
+
+ <p>
+  <%= f.label :file %><br>
+  <%= f.text_field :file %>
+ </p>
+
+ <p style="display:none;">
+  <%= f.label :likes %>
+  <%= f.number_field :likes, :value => 0 %>
+ </p>
+
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>
+<h1>Create a new Sig</h1>
+
+<%= form_for :sig, :method => :post, :url => {:action => "create"} do |f| %>
+ <p>
+    <%= f.label :title %><br>
+    <%= f.text_field :title %>
+  </p>
+ 
+  <p>
+    <%= f.label :tags %><br>
+    <%= f.text_field :tags %>
+  </p>
+
+ <p>
+  <%= f.label :file %><br> 
+  <%= f.text_field :file %>
+ </p>
+
+ <p style="display:none;">
+  <%= f.label :likes %>
+  <%= f.number_field :likes, :value => 0 %>
+ </p>
+
+  <p>
+    <%= f.submit %>
+  </p>		
+<% end %>
