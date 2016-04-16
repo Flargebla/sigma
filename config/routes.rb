@@ -18,6 +18,9 @@ Sigma::Application.routes.draw do
 
   resources :edges
   post 'edges/:id/connect' => 'edges#connect'
+  
+  resources :users
+
   # Example resource route with options:
   #   resources :products do
   #     member do
