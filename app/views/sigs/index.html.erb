@@ -74,7 +74,7 @@
     <header>
         <h1>S.I.G.M.A.</h1>
         <h2>Mouse over a module to view it</h2>
-    <p><%= button_to 'Contribute', new_sig_path, :method => :get %><p>
+    <p><%= link_to 'Contribute', new_sig_path %><p>
     <% if @current_user == :guest %>
 		<p>Welcome, Anon</p>
 	<% else %>
