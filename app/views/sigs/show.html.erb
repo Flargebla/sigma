@@ -25,9 +25,9 @@
 	<%= @sig.likes %>
 </p>
 
-<%= button_to 'Back to web', sigs_path, :method => :get %>
+<%= link_to 'Back to web', sigs_path %>
 
-<%= button_to 'Like', :method => :post, controller: 'sigs', action: 'like' %>
+<%= button_to 'Like', like_sig_path ,:method => :post %>
 
 <%= form_for :edge, :method => :post, :url => {:controller => "edges", :action => "connect"} do |f| %>
 	<p>     

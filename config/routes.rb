@@ -1,8 +1,8 @@
 Sigma::Application.routes.draw do
-  get "sessions/login"
-  get "sessions/home"
-  get "sessions/profile"
-  get "sessions/setting"
+  #get "sessions/login"
+  #get "sessions/home"
+  #get "sessions/profile"
+  #get "sessions/setting"
   # get "main/index"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
@@ -17,17 +17,36 @@ Sigma::Application.routes.draw do
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
 
   # Example resource route (maps HTTP verbs to controller actions automatically):
-  resources :sigs
-  post 'sigs/:id/like' => 'sigs#like'
+  resources :sigs do
+    member do
+	  post 'like'
+	end
+  end
 
-  resources :edges
-  post 'edges/:id/connect' => 'edges#connect'
-  
+  resources :edges do
+    member do
+	  post 'connect'
+	end
+  end
+
   resources :users
 
-  resources :sessions  
-  post 'sessions/login_attempt' => 'sessions#login_attempt'
-  get 'sessions/logout' => 'sessions#logout'
+  resources :sessions do
+    collection do
+	  get 'login'
+      get 'logout'
+      get 'setting'
+      get 'home'
+      post 'login_attempt'
+	end
+  end
+
+  #resources :sessions  
+  #get 'sessions/login' => 'sessions#login'
+  #post 'sessions/login_attempt' => 'sessions#login_attempt'
+  #get 'sessions/logout' => 'sessions#logout'
+  #get 'sessions/home' => 'sessions#home'
+  #get 'sessions/setting' => 'sessions#setting'
 
   #root :to => "sessions#login"
   #match "login", :to => "sessions#login"

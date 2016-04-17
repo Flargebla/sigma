@@ -1,2 +1,18 @@
-<h1>Sessions#home</h1>
-<p>Find me in app/views/sessions/home.html.erb</p>
+<!DOCTYPE html>
+<html>
+	<head>
+		<link href='https://fonts.googleapis.com/css?family=Arvo:400,700' rel='stylesheet' type='text/css'>
+		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+		<style>
+			body{
+				font-family: 'Arvo','sans-serif'
+			}	
+		</style>
+	</head>
+	<body>
+		<%= link_to 'To Web', sigs_path, :method => :get, class: ".btn-default" %>
+		<h1><%= @current_user.username %>, <small>Alek Coradini</small></h1>
+	</body>
+</html>

@@ -6,6 +6,14 @@ class SessionsController < ApplicationController
   def login
     #Login Form
   end
+	
+  def show
+	@current_user = User.find(session[:user_id])
+  end
+
+  def home
+	@current_user = User.find(session[:user_id])
+  end
 
   def login_attempt
     authorized_user = User.authenticate(params[:username_or_email],params[:login_password])
