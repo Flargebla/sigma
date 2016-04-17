@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <link href='https://fonts.googleapis.com/css?family=Arvo:400,700' rel='stylesheet' type='text/css'>
+    <title>Stevens Community Content Map</title>
+    <meta charset="utf-8">
+   
+    <script src="http://d3js.org/d3.v3.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <style>
+	@import url(https://fonts.googleapis.com/css?family=Montserrat:400,700);
+	
+	body {
+		background-color: maroon;
+	}
+
+	h1 {
+		font-family: 'Montserrat', sans-serif;
+		font-size: 36px;
+		margin: 10px 0;
+		font-weight: bold;
+		color: red;
+	}
+
+	h2, h3 {
+		font-family: 'Montserrat', sans-serif;
+		font-size: 18px;
+		margin: 5px 0;
+		font-weight: bold;
+		color: red;
+	}
+
+	header {
+		padding: 20px;
+		position: absolute;
+		top: 0;
+		left: 0;
+	}
+
+	footer {
+		font-family: 'Montserrat', sans-serif;
+		padding: 20px;
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		color: gray;
+	}
+
+	.node circle {
+	  stroke: gray;
+	  stroke-width: 1.5px;
+	  opacity: 1.0;
+	}
+
+	line {
+	  stroke: gray;
+	  stroke-width: 3px;
+	  stroke-opacity: 1.0;
+	}
+
+	.round {
+		overflow: hidden;
+		-webkit-border-radius: 50%;
+		-moz-border-radius: 50%;
+		-ms-border-radius: 50%;
+		-o-border-radius: 50%;
+		border-radius: 50%;
+	}
+
+	.add{
+		float: right;
+	}
+	</style>
+</head>
+ 
+<body>
+    <header>
+        <h1>S.I.G.M.A.</h1>
+        <h2>Mouse over a module to view it</h2>
+    <p id='add'><%= button_to 'Contribute', new_sig_path, :method => :get %><p>
+    </header>
+	<footer>
+        <p>&copy; The Little Memers, 2016<br />Created for DuckHacks Domestic 2016</p>
+    </footer>
+ 
+<table border="2" style="display:none;">
+  <tr>
+    <th>ID</th>
+    <th>Title</th>
+    <th>Tags</th>
+    <th>File</th>
+    <th>Time Created</th>
+    <th id='numSigs'><% i = 0%>
+		     <% Sig.find_each do |sig| %> 
+    		     <% i+=1 %>
+		     <% end %>
+		     <%= i %> 
+    </th>
+  </tr>
+ 
+  <% Sig.find_each do |sig| %>
+    <tr id="sig<%= sig.id %>">
+      <td id="sig<%= sig.id %>id"><%= sig.id %></td>
+      <td id="sig<%= sig.id %>title"><%= sig.title %></td>
+      <td id="sig<%= sig.id %>tags"><%= sig.tags %></td>
+      <td id="sig<%= sig.id %>file"><%= sig.file %></td>
+      <td id="sig<%= sig.id %>created_at"><%= sig.created_at %></td>
+      <td id="sig<%= sig.id %>details"><%= url_for controller: 'sigs', action: 'show', only_path: false, id: sig.id %></td>
+      <td id="sig<%= sig.id %>likes"><%= sig.likes %></td>
+    </tr>
+  <% end %>
+</table>
+
+<table style="display:none;">
+	<tr>
+		<th id='numEdges'><% v = 0%>
+				  <% Edge.find_each do |edge| %>
+				  <% v+=1 %>
+				  <% end %>
+				  <%= v %>
+	</tr>
+
+	<% Edge.find_each do |edge| %>
+		<tr id="edge<%= edge.id %>">
+			<td id="edge<%= edge.id %>aside"><%= edge.aside %></td>
+			<td id="edge<%= edge.id %>bside"><%= edge.bside %></td>
+		</tr>
+	<% end %>
+</table>
+
+<script>
+	var sig_num = parseInt(document.getElementById('numSigs').innerHTML);
+	var edge_num = parseInt(document.getElementById('numEdges').innerHTML);	
+	var data = {};
+	data.nodes = new Array(sig_num);
+	data.links = new Array(edge_num);
+	
+	for (var i = 0; i < sig_num; i++) {
+		data.nodes[i] = {size: Math.pow(i + 1, 2), image: "image.png", page: "http://google.com/"};
+		data.links[i] = {source: i, target: i};
+	}
+	
+	for (var j = 0; j < sig_num; j++) {
+		if (document.getElementById('sig' + (j + 1)).innerHTML != null) {
+			data.nodes[j].size = parseInt(document.getElementById('sig' + (j + 1) + 'likes').innerHTML);
+			data.nodes[j].image = document.getElementById('sig' + (j + 1) + 'file').innerHTML;
+			data.nodes[j].page = document.getElementById('sig' + (j + 1) + 'details').innerHTML;
+		}
+	}
+
+	for (var k = 0; k < edge_num; k++) {
+		if (document.getElementById('edge' + (k + 1)).innerHTML != null) {
+			data.links[k].source = parseInt(document.getElementById('edge' + (k + 1) + 'aside').innerHTML);
+			data.links[k].target = parseInt(document.getElementById('edge' + (k + 1) + 'bside').innerHTML);
+		}
+	}
+
+	var mouseOverFunction = function(d) {
+		var circle = d3.select(this);
+
+		force.linkDistance(2048).charge(-4096*8).start();
+
+		link
+			.transition(100)
+				.style("stroke-opacity", 0)
+				.transition(500)
+				.attr("marker-end", "url()");
+
+		circle
+			.transition(100)
+				.attr("width", 256)
+				.attr("height", 256)
+				.attr("x", -128)
+				.attr("y", -128)
+				.attr("src", node_image);
+	}
+
+	var mouseOutFunction = function() {
+		var circle = d3.select(this);
+
+		force.linkDistance(96).charge(-4096).start();
+	  
+		node
+			.transition(500)
+				.style("opacity", 1);
+
+		link
+			.transition(500)
+				.style("stroke-opacity", 1);
+
+		circle
+			.transition(500)
+				.attr("width", node_radius)
+				.attr("height", node_radius)
+				.attr("x", node_offset)
+				.attr("y", node_offset)
+				.attr("src", node_image)
+	}
+
+	function isConnected(a, b) {
+		return isConnectedAsTarget(a, b) || isConnectedAsSource(a, b) || a.index == b.index;
+	}
+
+	function isConnectedAsSource(a, b) {
+		return linkedByIndex[a.index + "," + b.index];
+	}
+
+	function isConnectedAsTarget(a, b) {
+		return linkedByIndex[b.index + "," + a.index];
+	}
+
+	function isEqual(a, b) {
+		return a.index == b.index;
+	}
+
+	function tick() {
+		link
+			.attr("x1", function(d) { return d.source.x; })
+			.attr("y1", function(d) { return d.source.y; })
+			.attr("x2", function(d) { return d.target.x; })
+			.attr("y2", function(d) { return d.target.y; });
+
+		node
+			.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+	}
+
+	function node_radius(d) {
+		return d.size + 25;
+	}
+	
+	function node_offset(d) {
+		return -(node_radius(d)/2);
+	}
+	
+	function node_image(d) {
+		return d.image;
+		}
+
+	function node_page(d) {
+		return "window.location = '" + String(d.page) + "';";
+	}
+
+	var width = window.innerWidth;
+	var height = window.innerHeight;
+
+	var nodes = data.nodes;
+	var links = data.links;
+	
+	try {
+		var force = d3.layout.force()
+			.nodes(nodes)
+			.links(links)
+			.linkDistance(96)
+			.charge(-4096)
+			.friction(0.7)
+			.gravity(0.25)
+			.size([width,height])
+			.start();
+	} catch (e) {
+		location.reload();
+	}
+
+	var linkedByIndex = {};
+	links.forEach(function(d) {
+		linkedByIndex[d.source.index + "," + d.target.index] = true;
+	});
+
+	var svg = d3.select("body").append("svg")
+		.attr("width", width)
+		.attr("height", height);
+
+	var link = svg.selectAll("line")
+		.data(links)
+		.enter().append("line")
+
+	var node = svg.selectAll(".node")
+		.data(nodes)
+		.enter().append("g")
+			.attr("class", "node")
+			.call(force.drag);
+
+	node
+		.append("svg:image")
+		.attr("xlink:href", node_image).attr("class", "round").attr("width", node_radius).attr("height", node_radius).attr("x", node_offset).attr("y", node_offset).attr("onclick", node_page)
+		.on("mouseover", mouseOverFunction)
+		.on("mouseout", mouseOutFunction);
+
+	svg
+		.insert("marker")
+		.attr("id", "arrowhead")
+		.attr("refX", 6 + 7)
+		.attr("refY", 2)
+		.attr("markerWidth", 6)
+		.attr("markerHeight", 4)
+		.attr("orient", "auto")
+		.append("path")
+			.attr("d", "M 0,0 V 4 L6,2 Z");
+
+	link
+		.attr("marker-end", "url()");
+
+	force
+		.on("tick",tick)
+	</script>
+</body>
+</html>
