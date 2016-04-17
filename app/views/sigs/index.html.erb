@@ -66,6 +66,10 @@
 		-o-border-radius: 50%;
 		border-radius: 50%;
 	}
+
+	.add{
+		float: right;
+	}
 	</style>
 </head>
  
@@ -73,9 +77,9 @@
     <header>
         <h1>S.I.G.M.A.</h1>
         <h2>Mouse over a module to view it</h2>
+    <p id='add'><%= button_to 'Contribute', new_sig_path, :method => :get %><p>
     </header>
-   
-    <footer>
+	<footer>
         <p>&copy; The Little Memers, 2016<br />Created for DuckHacks Domestic 2016</p>
     </footer>
  

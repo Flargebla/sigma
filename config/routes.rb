@@ -1,4 +1,8 @@
 Sigma::Application.routes.draw do
+  get "sessions/login"
+  get "sessions/home"
+  get "sessions/profile"
+  get "sessions/setting"
   # get "main/index"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
@@ -20,6 +24,16 @@ Sigma::Application.routes.draw do
   post 'edges/:id/connect' => 'edges#connect'
   
   resources :users
+
+  resources :sessions  
+  post 'sessions/login_attempt' => 'sessions#login_attempt'
+
+  #root :to => "sessions#login"
+  #match "login", :to => "sessions#login"
+  #match "logout", :to => "sessions#logout"
+  #match "home", :to => "sessions#home"
+  #match "profile", :to => "sessions#profile"
+  #match "setting", :to => "sessions#setting"
 
   # Example resource route with options:
   #   resources :products do

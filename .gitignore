@@ -9,6 +9,7 @@
 
 # Ignore the default SQLite database.
 /config/database.yml
+/config/initializers/secret_token.rb
 
 # Ignore all logfiles and tempfiles.
 /log/*.log
