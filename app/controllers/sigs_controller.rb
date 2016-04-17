@@ -1,6 +1,11 @@
 class SigsController < ApplicationController
 	def index
 		@sigs = Sig.all
+		begin
+			@current_user = User.find(session[:user_id])
+		rescue
+			@current_user = :guest
+		end
 	end
 
 	def like
@@ -24,10 +29,6 @@ class SigsController < ApplicationController
 	end
 	
 	def new
-
-	end
-
-	def index
 
 	end
 

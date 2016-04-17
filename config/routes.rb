@@ -8,7 +8,7 @@ Sigma::Application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'main#index'
+  root 'sessions#login'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
@@ -27,6 +27,7 @@ Sigma::Application.routes.draw do
 
   resources :sessions  
   post 'sessions/login_attempt' => 'sessions#login_attempt'
+  get 'sessions/logout' => 'sessions#logout'
 
   #root :to => "sessions#login"
   #match "login", :to => "sessions#login"

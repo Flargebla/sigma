@@ -15,7 +15,7 @@
 	}
 
 	h1 {
-		font-family: 'Montserrat', sans-serif;
+		font-family: 'Arvo', sans-serif;
 		font-size: 36px;
 		margin: 10px 0;
 		font-weight: bold;
@@ -23,7 +23,7 @@
 	}
 
 	h2, h3 {
-		font-family: 'Montserrat', sans-serif;
+		font-family: 'Arvo', sans-serif;
 		font-size: 18px;
 		margin: 5px 0;
 		font-weight: bold;
@@ -38,7 +38,7 @@
 	}
 
 	footer {
-		font-family: 'Montserrat', sans-serif;
+		font-family: 'Arvo', sans-serif;
 		padding: 20px;
 		position: absolute;
 		bottom: 0;
@@ -67,9 +67,6 @@
 		border-radius: 50%;
 	}
 
-	.add{
-		float: right;
-	}
 	</style>
 </head>
  
@@ -77,8 +74,13 @@
     <header>
         <h1>S.I.G.M.A.</h1>
         <h2>Mouse over a module to view it</h2>
-    <p id='add'><%= button_to 'Contribute', new_sig_path, :method => :get %><p>
-    </header>
+    <p><%= button_to 'Contribute', new_sig_path, :method => :get %><p>
+    <% if @current_user == :guest %>
+		<p>Welcome, Anon</p>
+	<% else %>
+		<p>Welcome,<%= @current_user.username %></p>
+	<% end %>
+	</header>
 	<footer>
         <p>&copy; The Little Memers, 2016<br />Created for DuckHacks Domestic 2016</p>
     </footer>
