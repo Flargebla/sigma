@@ -1,4 +1,7 @@
 class SigsController < ApplicationController
+	
+    before_filter :authenticate_user, :only =>[:new,:create]
+
 	def index
 		@sigs = Sig.all
 		begin
