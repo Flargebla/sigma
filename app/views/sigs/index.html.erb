@@ -77,8 +77,10 @@
     <p><%= link_to 'Contribute', new_sig_path %><p>
     <% if @current_user == :guest %>
 		<p>Welcome, Anon</p>
+		<%= link_to 'Click to login', login_sessions_path %>
 	<% else %>
 		<p>Welcome,<%= @current_user.username %></p>
+		<%= link_to 'Profile', home_sessions_path %>
 	<% end %>
 	</header>
 	<footer>
