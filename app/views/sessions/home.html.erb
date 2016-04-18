@@ -12,7 +12,8 @@
 		</style>
 	</head>
 	<body>
-		<%= link_to 'To Web', sigs_path, :method => :get, class: ".btn-default" %>
+		<%= link_to 'To Web', sigs_path %>
+		<%= link_to 'Logout', logout_sessions_path %>
 		<h1><%= @current_user.username %>, <small>Alek Coradini</small></h1>
 	</body>
 </html>

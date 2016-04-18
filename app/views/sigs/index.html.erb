@@ -81,6 +81,7 @@
 	<% else %>
 		<p>Welcome,<%= @current_user.username %></p>
 		<%= link_to 'Profile', home_sessions_path %>
+		<%= link_to 'Logout', logout_sessions_path %>
 	<% end %>
 	</header>
 	<footer>
