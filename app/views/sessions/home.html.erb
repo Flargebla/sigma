@@ -14,6 +14,9 @@
 	<body>
 		<%= link_to 'To Web', sigs_path %>
 		<%= link_to 'Logout', logout_sessions_path %>
-		<h1><%= @current_user.username %>, <small>Alek Coradini</small></h1>
+		<div class="well">
+			<h1><%= @current_user.username %>, <small><%= @current_user.first_name %> <%= @current_user.last_name %></small></h1>
+		<blockquote><p>Year <%=@current_user.year %> - <%= @current_user.major %></p></blockquote>
+		</div>
 	</body>
 </html>
