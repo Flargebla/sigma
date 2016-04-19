@@ -37,7 +37,7 @@ class SigsController < ApplicationController
 	end
 
 	def create
-		@sig = Sig.new(params.require(:sig).permit(:title, :tags, :file, :like))
+		@sig = Sig.new(params.require(:sig).permit(:title, :tags, :file, :likes))
 		
 		@sig.save
 		redirect_to @sig

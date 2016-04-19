@@ -8,10 +8,14 @@
     <script src="http://d3js.org/d3.v3.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
     <style>
-	@import url(https://fonts.googleapis.com/css?family=Montserrat:400,700);
+
+	html {
+		height: 100%;
+	}
 	
 	body {
 		background-color: maroon;
+		height: 100%;
 	}
 
 	h1 {
@@ -37,15 +41,6 @@
 		left: 0;
 	}
 
-	footer {
-		font-family: 'Arvo', sans-serif;
-		padding: 20px;
-		position: absolute;
-		bottom: 0;
-		left: 0;
-		color: gray;
-	}
-
 	.node circle {
 	  stroke: gray;
 	  stroke-width: 1.5px;
@@ -66,28 +61,48 @@
 		-o-border-radius: 50%;
 		border-radius: 50%;
 	}
+	
+	.sidebar{
+		font-family: 'Arvo';
+		border-right: 2px solid grey;
+		float: left;
+		display: inline-block;
+		width: 22%;
+		color: gray;
+		min-height: 100%;
+	}	
+
+	
+	.sidebar a{
+		color: white;
+		text-decoration: none;
+	}
+
+	.sidebar a:hover{
+		color: black;
+	}
 
 	</style>
 </head>
  
 <body>
-    <header>
+	<div class="sidebar">
         <h1>S.I.G.M.A.</h1>
         <h2>Mouse over a module to view it</h2>
-    <p><%= link_to 'Contribute', new_sig_path %><p>
-    <% if @current_user == :guest %>
-		<p>Welcome, Anon</p>
-		<%= link_to 'Click to login', login_sessions_path %>
-	<% else %>
-		<p>Welcome,<%= @current_user.username %></p>
-		<%= link_to 'Profile', home_sessions_path %>
-		<%= link_to 'Logout', logout_sessions_path %>
-	<% end %>
-	</header>
-	<footer>
-        <p>&copy; The Little Memers, 2016<br />Created for DuckHacks Domestic 2016</p>
-    </footer>
- 
+    	<p><%= link_to 'Contribute', new_sig_path %><p>
+    	<% if @current_user == :guest %>
+			<p>Welcome, Anon</p>
+			<%= link_to 'Click to login', login_sessions_path %>
+		<% else %>
+			<p>Welcome,<%= @current_user.username %></p>
+			<%= link_to 'Profile', home_sessions_path %>
+			<%= link_to 'Logout', logout_sessions_path %>
+		<% end %>
+    	<div class="">
+			
+		</div>
+		<p>&copy; The Little Memers, 2016</br>Created for DuckHacks Domestic 2016</p>
+	</div>
 <table border="2" style="display:none;">
   <tr>
     <th>ID</th>
