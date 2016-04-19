@@ -19,6 +19,7 @@ class SigsController < ApplicationController
 	end
 
 	def connect
+		# Add a check to throw message if edge already exists
 		@edge = Edge.new(1,params[:id])
 		@edge.save
 	end
@@ -36,7 +37,7 @@ class SigsController < ApplicationController
 	end
 
 	def create
-		@sig = Sig.new(params.require(:sig).permit(:title, :tags, :file, :likes))
+		@sig = Sig.new(params.require(:sig).permit(:title, :tags, :file, :like))
 		
 		@sig.save
 		redirect_to @sig
