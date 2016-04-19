@@ -2,7 +2,6 @@
 <html lang="en-us">
 <head>
     <link href='https://fonts.googleapis.com/css?family=Arvo:400,700' rel='stylesheet' type='text/css'>
-    <title>Stevens Community Content Map</title>
     <meta charset="utf-8">
    
     <script src="http://d3js.org/d3.v3.js"></script>
@@ -34,13 +33,6 @@
 		color: red;
 	}
 
-	header {
-		padding: 20px;
-		position: absolute;
-		top: 0;
-		left: 0;
-	}
-
 	.node circle {
 	  stroke: gray;
 	  stroke-width: 1.5px;
@@ -65,9 +57,10 @@
 	.sidebar{
 		font-family: 'Arvo';
 		border-right: 2px solid grey;
+		width: 22%;
+		position: relative;
 		float: left;
 		display: inline-block;
-		width: 22%;
 		color: gray;
 		min-height: 100%;
 	}	
@@ -81,6 +74,19 @@
 	.sidebar a:hover{
 		color: black;
 	}
+
+	#web{
+		height: 100%;
+		float: left;
+		display: inline-block;
+		width: 76%;
+		overflow: hidden;
+	}
+
+	.footer{
+		position: absolute;
+		bottom: 0;
+	}	
 
 	</style>
 </head>
@@ -101,7 +107,10 @@
     	<div class="">
 			
 		</div>
-		<p>&copy; The Little Memers, 2016</br>Created for DuckHacks Domestic 2016</p>
+		<p class="footer">&copy; The Little Memers, 2016</br>Created for DuckHacks Domestic 2016</p>
+	</div>
+	<div id="web">
+
 	</div>
 <table border="2" style="display:none;">
   <tr>
@@ -285,7 +294,7 @@
 		linkedByIndex[d.source.index + "," + d.target.index] = true;
 	});
 
-	var svg = d3.select("body").append("svg")
+	var svg = d3.select("#web").append("svg")
 		.attr("width", width)
 		.attr("height", height);
 
