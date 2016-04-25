@@ -7,15 +7,13 @@
 </p>
 
 <p>
-	<strong>Tags:</strong>
-	<%= @sig.tags %>
-</p>
-
-<p>
 	<strong>Time Created:</strong>
 	<%= @sig.created_at %>
 </p>
 
+<p>
+	<strong>Author:</strong>
+	<%= @sig.user.first_name %> <%= @sig.user.last_name %>
 <p>
 	<img src="<%= @sig.file %>" >
 </p>

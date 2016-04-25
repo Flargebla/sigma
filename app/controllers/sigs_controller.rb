@@ -33,11 +33,15 @@ class SigsController < ApplicationController
 	end
 	
 	def new
-
+		begin
+			@current_user = User.find(session[:user_id])
+		rescue
+			@current_user = :guest
+		end	
 	end
 
 	def create
-		@sig = Sig.new(params.require(:sig).permit(:title, :tags, :file, :likes))
+		@sig = Sig.new(params.require(:sig).permit(:title, :user_id, :file, :likes))
 		
 		@sig.save
 		redirect_to @sig

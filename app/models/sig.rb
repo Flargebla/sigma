@@ -1,3 +1,3 @@
 class Sig < ActiveRecord::Base
-	has_many :edges
+	belongs_to :user
 end

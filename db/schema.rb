@@ -22,12 +22,14 @@ ActiveRecord::Schema.define(version: 20160405010543) do
 
   create_table "sigs", force: true do |t|
     t.string   "title"
-    t.text     "tags"
+    t.integer  "user_id"
     t.text     "file"
     t.integer  "likes"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "sigs", ["user_id"], name: "index_sigs_on_user_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "username"

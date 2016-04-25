@@ -32,11 +32,6 @@
 		<%= f.text_field :title %>
 	  </p>
 
-	  <p>
-		<%= f.label :tags %><br>
-		<%= f.text_field :tags %>
-	  </p>
-
 	 <p>
 	  <%= f.label :file %><br>
 	  <%= f.text_field :file %>
@@ -45,6 +40,9 @@
 	 <p style="display:none;">
 	  <%= f.label :likes %>
 	  <%= f.number_field :likes, :value => 0 %>
+
+	  <%= f.label :user_id %>
+	  <%= f.select :user_id, :value => @current_user.id %>
 	 </p>
 
 	  <p>
