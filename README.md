@@ -4,4 +4,4 @@ The Stevens Institute Graphical Media Aggregator is a tool being developed by me
 
 The project originally began as a project for a Stevens hackathon and has since been under development.
 
-![Alt text](/app/assets/images/RoundSig1.png?raw=true "S.I.G.M.A")
+![Alt text](/app/assets/images/RoundSig.png?raw=true "S.I.G.M.A")
