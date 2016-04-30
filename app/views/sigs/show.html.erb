@@ -27,16 +27,18 @@
 
 <%= button_to 'Like', like_sig_path ,:method => :post %>
 
-<%= form_for :edge, :method => :post, :url => {:controller => "edges", :action => "connect"} do |f| %>
-	<p>     
-	 	<%= f.label :aside %>
-		<%= f.collection_select :aside, @user_sigs, :id, :title %>
-	</p>
+<% if @user_sigs != :guest %>
+	<%= form_for :edge, :method => :post, :url => {:controller => "edges", :action => "connect"} do |f| %>
+		<p>     
+	 		<%= f.label :aside %>
+			<%= f.collection_select :aside, @user_sigs, :id, :title %>
+		</p>
 
-	<p style="display:none;">
-		<%= f.label :bside %>
-		<%= f.number_field :bside, :value => @sig.id %>
-	</p>
+		<p style="display:none;">
+			<%= f.label :bside %>
+			<%= f.number_field :bside, :value => @sig.id %>
+		</p>
 	
-	<%= f.submit 'Connect this edge' %> 
+		<%= f.submit 'Connect this edge' %> 
+	<% end %>
 <% end %>
