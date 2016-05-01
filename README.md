@@ -46,16 +46,22 @@ Once a user is logged in, they can begin uploading images, memes, and even **GIF
 
 ## FAQ
 1. *What is a Sig?*
+
 ... A *Sig* is short for Sigma, which is the greek letter "S". In this webapp, a Sig is the name of any file that is uploaded to S.I.G.M.A.. Sigs are connected with *Edges*.
 2. *What do I need to sign up for S.I.G.M.A.?*
+
 ... All you need is a valid E-mail, username, and password. On the sign up page, you can also fill out other fields, such as your college year, and major. This *is* a college project, after all.
 3. *How will you deal with abuse?*
+
 ... As mentioned in the **Coming Soon** section above, we are planning on adding a report button to alow users to report a user. The Little Memers (that's us) will look at the reports and act accordingly from there.
 4. *What does the S.I.G.M.A. stand for?*
+
 ... Stevens Institute Graphical Media Aggregator. The "M" can also stand for *meme*.
 5. *Will S.I.G.M.A. be open to the public and not just the Stevens Community?*
+
 ... S.I.G.M.A. was developed with the Stevens Community in mind, and as a result the webapp will be primarily for Stevens. However, anyone can really use it. We hope to expand S.I.G.M.A to the point where there are multiple communities, although that would be a complicated goal for another time.
 6. *Did S.I.G.M.A. win the competition for which it was made for?*
+
 ...Unfortunately, no. However the main committe did say the our team came in **4th** place, which is something. Furthermore, the reception to S.I.G.M.A. was so positive, that we decided to continue development.
 
 ## Issues
